@@ -10,13 +10,15 @@
 
 let isAuthor = false;
 let isAdmin = false;
-if(currentUser && foundCamp.author.equals(currentUser._id) || currentUser._id.equals(process.env.IS_ADMIN)){
+if(currentUser){
+    if(currentUser && foundCamp.author.equals(currentUser._id) || currentUser && currentUser._id.equals(process.env.IS_ADMIN)){
     author = true;
+    }
+    if(currentUser && currentUser._id.equals(process.env.IS_ADMIN)){
+    isAdmin = true;
+    }
 }
 
-if(currentUser._id.equals(process.env.IS_ADMIN)){
-    isAdmin = true;
-}
 %>
 
 
@@ -54,7 +56,7 @@ if(currentUser._id.equals(process.env.IS_ADMIN)){
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Location: <%= foundCamp.location%></li>
                 <li class="list-group-item">Price: $<%= foundCamp.price%>/Night</li>
-                <% if(!author || isAdmin){ %>
+                <% if(!isAuthor || isAdmin){ %>
                 <li class="list-group-item">Created by: <b> <%= foundCamp.author.username%></b></li> <% } %>
             </ul>
 
