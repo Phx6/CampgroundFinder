@@ -1,0 +1,69 @@
+<% layout("/layout/boilerplate")%>
+
+<head>
+    <link rel="stylesheet" href="/stylesheets/newPage.css">
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4 my-auto">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">New Campground</h5>
+                    <form action="/campgrounds" method="POST" novalidate class="validated-form"
+                        enctype="multipart/form-data">
+                        <div class="mb-2">
+                            <label class="form-label" for="title">Title</label>
+                            <input class="form-control" type="text" id="title" name="campground[title]" required>
+                            <div class="valid-feedback">Looks Good</div>
+                            <div class="invalid-feedback">Please Add a Name</div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" for="location">Location</label>
+                            <input class="form-control" type="text" id="location" name="campground[location]" required
+                                placeholder="City, Province/State">
+                            <div class="valid-feedback">Looks Good</div>
+                            <div class="invalid-feedback">Please Add a Location</div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label" for="price">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" name="campground[price]" id="price" class="form-control"
+                                    aria-label="Amount (to the nearest dollar) " required>
+                                <div class="valid-feedback">Looks Good</div>
+                                <div class="invalid-feedback">Please Add a Price</div>
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFileMultiple" class="form-label">Add Images</label>
+                            <input class="form-control" name="image" type="file" id="formFileMultiple" multiple>
+                            <p>Press Ctrl to select multiple pictures</p>
+                        </div>
+
+
+                        <!-- this was the olf version on pictures, now that we enabled the enctype, we'll acept picture from the user
+                            <div class="mb-2">
+                            <label class="form-label" for="image">Image Url</label>
+                            <input class="form-control" type="text" id="image" name="campground[image]" required>
+                            <div class="valid-feedback">Looks Good</div>
+                            <div class="invalid-feedback">Please Add a Picture</div>
+                        </div> -->
+                        <div class="mb-2">
+                            <label class="form-label" for="description">Description</label>
+                            <textarea class="form-control" type="text" id="description" name="campground[description]"
+                                required></textarea>
+                            <div class="valid-feedback">Looks Good</div>
+                            <div class="invalid-feedback">Please Add a Short Description</div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-success">Add new campground</button>
+                            <a class="btn btn-danger" href="/campgrounds">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
