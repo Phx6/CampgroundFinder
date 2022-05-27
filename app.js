@@ -65,10 +65,10 @@ const sessionConfig = {
     cookie: {
         //makes the cookie unaccessible through js. only in html. helps prevent people trying to steal cookies information.
         httpOnly: true,
-        //hats to allow cookies to be usable only on https.
-
-        // secure: true, UNCOMMENT ON DEPLOY
-
+        //thats to allow cookies to be usable only on https.
+        //********** */
+        secure: true, //COMMENT WHEN EDITTING/PROGRAMING
+        //************ */
         //this is to make the cookie expire in a week (1000 milliseconds in a seconds, 60 sec ina  minute and so on to reach one week in milliseconds)
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7

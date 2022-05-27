@@ -15,7 +15,7 @@ module.exports.new = (req, res) => {
 module.exports.create = async (req, res) => {
     const geoData = await geocoder.forwardGeocode({
         query: req.body.campground.location,
-        limit: 1
+        limit: 10
     }).send()
     const newCamp = new Campground(req.body.campground)
     //here we map over all of our file the add the pictures
@@ -43,6 +43,11 @@ module.exports.update = async (req, res) => {
     const { id } = req.params
     console.log(req.body.deleteImage)
     const updatedCamp = await Campground.findByIdAndUpdate(id, { ...req.body.campground })
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.campground.location,
+        limit: 10
+    }).send()
+    updatedCamp.geometry = geoData.body.features[0].geometry
     //this create the array of new image
     const img = req.files.map(f => ({ url: f.path, filename: f.filename }))
     updatedCamp.image.push(...img) //here we spread the array into single image, so we dont get an error for push in array in an other array in mongoose

@@ -7,11 +7,16 @@
 
 
 <%
-let author = false;
-let reviewAuthor = false;
-if(currentUser && foundCamp.author.equals(currentUser._id)){
+
+let isAuthor = false;
+let isAdmin = false;
+if(currentUser && foundCamp.author.equals(currentUser._id) || currentUser._id.equals(process.env.IS_ADMIN)){
     author = true;
-} else { author = false}
+}
+
+if(currentUser._id.equals(process.env.IS_ADMIN)){
+    isAdmin = true;
+}
 %>
 
 
@@ -49,11 +54,11 @@ if(currentUser && foundCamp.author.equals(currentUser._id)){
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Location: <%= foundCamp.location%></li>
                 <li class="list-group-item">Price: $<%= foundCamp.price%>/Night</li>
-                <% if(!author){ %>
+                <% if(!author || isAdmin){ %>
                 <li class="list-group-item">Created by: <b> <%= foundCamp.author.username%></b></li> <% } %>
             </ul>
 
-            <% if(author) {%>
+            <% if(isAuthor || isAdmin) {%>
             <div class="card-body ms-auto">
                 <a href="/campgrounds/<%=foundCamp._id%>/edit" class="card-link btn btn-success">Update
                     <%= foundCamp.title %></a>
@@ -123,7 +128,7 @@ if(currentUser && foundCamp.author.equals(currentUser._id)){
                 <p class="card-text"><b>Review:</b> <%= review.body%></p>
                 <h6 class="card-subtitle mb-2 text-muted">By: <%= review.author.username%></h6>
 
-                <% if(currentUser && review.author.equals(currentUser._id)){ %>
+                <% if(currentUser && review.author.equals(currentUser._id) || isAdmin){ %>
                 <form action="/campgrounds/<%=foundCamp._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-sm btn-danger">Delete</button>
                 </form>

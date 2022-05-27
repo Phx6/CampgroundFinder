@@ -23,9 +23,13 @@
                     <% if(!currentUser) {%>
                     <a href="/login" class="nav-link">Login</a>
                     <a href="/register" class="nav-link">Register</a>
-                    <% }else {%>
+                    <% }else { console.log(currentUser)%>
                     <a href="/logout" class="nav-link">Logout</a>
+                    <% if(currentUser._id.equals(process.env.IS_ADMIN)){ %>
+                    <a class="nav-link disabled" style="color: red;">ADMIN</a>
                     <% } %>
+                    <% } %>
+
                 </nav>
             </div>
         </header>
