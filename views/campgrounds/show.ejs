@@ -11,8 +11,8 @@
 let isAuthor = false;
 let isAdmin = false;
 if(currentUser){
-    if(currentUser && foundCamp.author.equals(currentUser._id) || currentUser && currentUser._id.equals(process.env.IS_ADMIN)){
-    author = true;
+    if(currentUser && foundCamp.author.equals(currentUser._id)){
+    isAuthor = true;
     }
     if(currentUser && currentUser._id.equals(process.env.IS_ADMIN)){
     isAdmin = true;
