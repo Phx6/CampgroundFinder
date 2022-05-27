@@ -85,6 +85,7 @@ app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }))
 
 
 const scriptSrcUrls = [
+    "https://connect.facebook.net/en_US/iab.autofill.enhanced.js",
     "https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js",
     "https://stackpath.bootstrapcdn.com/",
     "https://api.tiles.mapbox.com/",
