@@ -64,7 +64,7 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         //makes the cookie unaccessible through js. only in html. helps prevent people trying to steal cookies information.
-        httpOnly: true,
+        // httpOnly: true, //TEST FOR MOBILE, UNCOMMENT IF NOT WORKING
         //thats to allow cookies to be usable only on https.
         //********** */
         secure: true, //COMMENT WHEN EDITTING/PROGRAMING
