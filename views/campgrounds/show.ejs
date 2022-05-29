@@ -122,7 +122,7 @@ if(currentUser){
         <h3>No one reviewed that camp yet !</h3>
         <% } %>
 
-        <% for(let review of foundCamp.reviews) { %>
+        <%for(let review of foundCamp.reviews.slice().reverse()) { %>
         <div class="card mb-3">
             <div class="card-body">
                 <!-- we changed the rating system with stars. (see starability on github !) -->
