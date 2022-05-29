@@ -32,3 +32,9 @@ body{
  h2, h3, legend, label{
      color: white;
  }
+
+ @media (max-width: 500px){
+     #cluster-map{
+         height: 300px
+     }
+ }
