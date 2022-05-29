@@ -88,9 +88,9 @@ if(currentUser){
                 <!-- the whole field set is from starability too. jusst change the name to review[rating], to send the data to mongo like we set this up earlier -->
                 <fieldset class="starability-basic">
                     <legend>Rating:</legend>
-                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked
-                        aria-label="No rating." />
-                    <input type="radio" id="first-rate1" name="review[rating]" value="1" checked="checked" />
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" aria-label="No rating."
+                        required />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                     <label for="first-rate1" title="Terrible">1 star</label>
                     <input type="radio" id="first-rate2" name="review[rating]" value="2" />
                     <label for="first-rate2" title="Not good">2 stars</label>
@@ -98,8 +98,9 @@ if(currentUser){
                     <label for="first-rate3" title="Average">3 stars</label>
                     <input type="radio" id="first-rate4" name="review[rating]" value="4" />
                     <label for="first-rate4" title="Very good">4 stars</label>
-                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" checked />
                     <label for="first-rate5" title="Amazing">5 stars</label>
+                    <div class="invalid-feedback">Oops, don't forget to add a rating!</div>
                 </fieldset>
             </div>
 

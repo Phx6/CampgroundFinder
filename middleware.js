@@ -1,7 +1,8 @@
 const { campgroundSchema, reviewSchema } = require("./Schemas.js")
 const AppError = require("./utilities/AppError")
 const Campground = require("./models/campgrounds")
-const Review = require("./models/review")
+const Review = require("./models/review");
+const review = require("./models/review");
 const admin = process.env.IS_ADMIN;
 
 
@@ -65,7 +66,10 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 
 module.exports.validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);
-    if (error) {
+    if (review.rating < 1) {
+        req.flash("error", "Oops, don't forget to choose a rating !")
+    }
+    else if (error) {
         const msg = error.details.map(el => el.message).join(",")
         throw new AppError(msg, 400)
     } else {
