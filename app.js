@@ -25,7 +25,8 @@ const secret = process.env.SECRET || "thisisabadsecret"
 
 const campgroundsRoutes = require("./routes/campgrounds")
 const reviewsRoutes = require('./routes/reviews')
-const authRoutes = require("./routes/auth")
+const authRoutes = require("./routes/auth");
+const { NONAME } = require("dns");
 
 const app = express()
 
@@ -55,14 +56,41 @@ store.on("error", function (e) {
     console.log("SESSION STORE ERROR", e)
 })
 
-const sessionConfig = {
+
+//REUSE IF NOT WORKING    ADDED PROXY ADD SAME SITE BELOW
+// const sessionConfig = {
+//     store,
+//     //the name is what our cookie will be called. change it to make the hackers job more difficult to hijack session information
+//     name: "_kesh_15afc",
+//     secret,
+//     resave: false,
+//     saveUninitialized: true,
+//     proxy: true,
+//     cookie: {
+//         //makes the cookie unaccessible through js. only in html. helps prevent people trying to steal cookies information.
+//         httpOnly: true,
+//         //thats to allow cookies to be usable only on https.
+//         //********** */
+//         secure: true, //COMMENT WHEN EDITTING/PROGRAMING
+//         //************ */
+//         //this is to make the cookie expire in a week (1000 milliseconds in a seconds, 60 sec ina  minute and so on to reach one week in milliseconds)
+//         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+//         maxAge: 1000 * 60 * 60 * 24 * 7
+//     },
+
+// }
+
+//always put the session on top of other app.use
+app.use(session({
     store,
     //the name is what our cookie will be called. change it to make the hackers job more difficult to hijack session information
     name: "_kesh_15afc",
     secret,
     resave: false,
     saveUninitialized: true,
+    proxy: true,
     cookie: {
+        sameSite: "none",
         //makes the cookie unaccessible through js. only in html. helps prevent people trying to steal cookies information.
         httpOnly: true,
         //thats to allow cookies to be usable only on https.
@@ -74,10 +102,7 @@ const sessionConfig = {
         maxAge: 1000 * 60 * 60 * 24 * 7
     },
 
-}
-
-//always put the session on top of other app.use
-app.use(session(sessionConfig))//this one is the actual session
+}))//this one is the actual session
 app.use(flash())
 // helmet breaking my app for now.. not sure how to fix this so ill wait
 app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }))
